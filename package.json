@@ -1,6 +1,6 @@
 {
   "name": "rehype-custom-toc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "rehype plugin to generate a customizable table of contents",
   "keywords": [
     "rehype",
