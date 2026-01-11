@@ -14,7 +14,7 @@ npm install rehype-custom-toc
 import remarkComment from "remark-comment";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
-import rehypeCustomToc from "./index";
+import rehypeCustomToc from "rehype-custom-toc";
 import rehypeStringify from "rehype-stringify";
 import { unified } from "unified";
 
