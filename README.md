@@ -10,7 +10,7 @@ npm install rehype-custom-toc
 
 ## Example
 
-```javascript
+```typescript
 import remarkComment from "remark-comment";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
