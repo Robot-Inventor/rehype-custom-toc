@@ -1,6 +1,6 @@
 # rehype-custom-toc
 
-rehype plugin to generate a customizable table of contents.
+rehype plugin to generate a customizable table of contents. If you are using Astro, you can use the convenient wrapper [astro-custom-toc](https://github.com/Robot-Inventor/astro-custom-toc).
 
 ## Installation
 
