@@ -8,7 +8,11 @@ rehype plugin to generate a customizable table of contents.
 npm install rehype-custom-toc
 ```
 
-## Example
+## Example usage
+
+The table of contents will be inserted at the location of the `<!-- toc -->` comment or at the beginning of the file if no comment is found.
+
+When parsing HTML with rehype, the `<!-- toc -->` comment is preserved as-is, but when converting from Markdown you need to convert Markdown comments to HTML comments (as shown below with `remark-comment`) so rehype-custom-toc can detect the ToC marker.
 
 ```typescript
 import remarkComment from "remark-comment";
