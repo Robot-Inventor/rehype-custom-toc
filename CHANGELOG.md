@@ -1,5 +1,11 @@
 # rehype-custom-toc
 
+## 1.0.2
+
+### Patch Changes
+
+- [#12](https://github.com/Robot-Inventor/rehype-custom-toc/pull/12) [`d6d1a3d`](https://github.com/Robot-Inventor/rehype-custom-toc/commit/d6d1a3d18536dcb9eda6137e4f92b0926bd25f72) Thanks [@renovate](https://github.com/apps/renovate)! - chore(deps): update dependency unist-util-visit to v5.1.0
+
 ## 1.0.1
 
 ### Patch Changes
