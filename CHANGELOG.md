@@ -1,5 +1,11 @@
 # rehype-custom-toc
 
+## 1.0.4
+
+### Patch Changes
+
+- [#30](https://github.com/Robot-Inventor/rehype-custom-toc/pull/30) [`7498861`](https://github.com/Robot-Inventor/rehype-custom-toc/commit/74988613c09d85fc2e1f46dbd85e50a780b656b6) Thanks [@dependabot](https://github.com/apps/dependabot)! - build(deps): bump picomatch
+
 ## 1.0.3
 
 ### Patch Changes
