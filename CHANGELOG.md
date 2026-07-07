@@ -1,5 +1,11 @@
 # rehype-custom-toc
 
+## 1.0.7
+
+### Patch Changes
+
+- [#66](https://github.com/Robot-Inventor/rehype-custom-toc/pull/66) [`79cd4f5`](https://github.com/Robot-Inventor/rehype-custom-toc/commit/79cd4f52dd002024c4ba60cd30d4d8c0012fc803) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - chore: update vulnerable dependencies
+
 ## 1.0.6
 
 ### Patch Changes
