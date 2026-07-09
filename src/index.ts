@@ -73,6 +73,48 @@ const DEFAULT_OPTIONS = {
 } as const satisfies Required<RehypeCustomTocOptions>;
 
 /**
+ * Checks if a node is a heading element.
+ * @param node The node to check
+ * @returns True if the node is a heading element, false otherwise
+ */
+const isHeading = (node: Element): boolean => ["h1", "h2", "h3", "h4", "h5", "h6"].includes(node.tagName);
+
+/**
+ * Adds an ID to a heading element and extracts its text.
+ * @param node The heading element
+ * @param slugger The GitHubSlugger instance
+ * @returns An object containing the slug and text of the heading
+ */
+const addIdToHeading = (node: Element, slugger: GitHubSlugger): { slug: string; text: string } => {
+    const text = toText(node).trim();
+    // Empty-string ids should be replaced with a generated slug
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+    const slug = node.properties.id || slugger.slug(text);
+    node.properties.id = slug;
+    return { slug, text };
+};
+
+/**
+ * Rehype plugin to add slugs to headings in the HAST tree.
+ * @returns The transformer function
+ */
+const rehypeSlugger: Plugin<[], Root> = () => {
+    /**
+     * The transformer function for the plugin.
+     * @param tree The HAST tree
+     */
+    const transformer: Transformer<Root> = (tree: Root) => {
+        const slugger = new GitHubSlugger();
+        visit(tree, "element", (node) => {
+            if (!isHeading(node)) return;
+            addIdToHeading(node, slugger);
+        });
+    };
+
+    return transformer;
+};
+
+/**
  * Generate the table of contents from the headings data.
  * @param tree The HAST tree
  * @param options Options for the plugin
@@ -90,11 +132,9 @@ const generateToc = (tree: Root, options: Required<RehypeCustomTocOptions>): Roo
     const headings: Array<{ depth: number; slug: string; text: string }> = [];
     const slugger = new GitHubSlugger();
     visit(tree, "element", (node) => {
-        if (!["h1", "h2", "h3", "h4", "h5", "h6"].includes(node.tagName)) return;
+        if (!isHeading(node)) return;
 
-        const text = toText(node).trim();
-        const slug = (node.properties["id"] as string) || slugger.slug(text);
-        node.properties["id"] = slug;
+        const { slug, text } = addIdToHeading(node, slugger);
         // eslint-disable-next-line no-magic-numbers
         const depth = parseInt(node.tagName.slice(1), 10);
         headings.push({
@@ -153,7 +193,7 @@ const generateToc = (tree: Root, options: Required<RehypeCustomTocOptions>): Roo
 /**
  * Rehype plugin to generate a table of contents.
  * @param userOptions Options for the plugin
- * @returns The plugin
+ * @returns The transformer function
  */
 const rehypeCustomToc: Plugin<[RehypeCustomTocOptions], Root> = (userOptions: RehypeCustomTocOptions) => {
     const options = { ...DEFAULT_OPTIONS, ...userOptions };
@@ -197,4 +237,4 @@ const rehypeCustomToc: Plugin<[RehypeCustomTocOptions], Root> = (userOptions: Re
 };
 
 export default rehypeCustomToc;
-export type { RehypeCustomTocOptions, RehypeCustomTocTemplate };
+export { type RehypeCustomTocOptions, type RehypeCustomTocTemplate, rehypeSlugger };

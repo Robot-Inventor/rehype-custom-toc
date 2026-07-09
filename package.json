@@ -58,6 +58,7 @@
     "cross-env": "^10.1.0",
     "eslint": "^10.0.0",
     "prettier": "^3.7.4",
+    "rehype-parse": "^9.0.1",
     "rehype-stringify": "^10.0.1",
     "remark-comment": "^1.0.0",
     "remark-parse": "^11.0.0",

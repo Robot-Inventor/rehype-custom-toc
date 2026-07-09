@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest";
-import rehypeCustomToc, { type RehypeCustomTocOptions } from "./index";
+import rehypeCustomToc, { type RehypeCustomTocOptions, rehypeSlugger } from "./index";
 import remarkComment from "remark-comment";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
+import rehypeParse from "rehype-parse";
 import rehypeStringify from "rehype-stringify";
 import { unified } from "unified";
 
@@ -15,7 +16,7 @@ interface Comment extends Node {
     commentValue: string;
 }
 
-const createProcessor = (options?: RehypeCustomTocOptions) => {
+const createRehypeCustomTocProcessor = (options?: RehypeCustomTocOptions) => {
     const processor = unified()
         .use(remarkParse)
         .use(remarkComment, {
@@ -59,7 +60,7 @@ This is a sample markdown paragraph.
 
 describe("rehype-custom-toc", () => {
     it("matches the README example output", async () => {
-        const processor = createProcessor();
+        const processor = createRehypeCustomTocProcessor();
         const result = await processor.process(markdown);
 
         const expected = `
@@ -87,7 +88,7 @@ describe("rehype-custom-toc", () => {
     });
 
     it("uses a custom template when provided", async () => {
-        const processor = createProcessor({
+        const processor = createRehypeCustomTocProcessor({
             template: (html) => `<div class="toc-wrapper">${html}</div>`
         });
         const result = await processor.process(markdown);
@@ -114,7 +115,7 @@ describe("rehype-custom-toc", () => {
     });
 
     it("respects maxDepth of 2", async () => {
-        const processor = createProcessor({
+        const processor = createRehypeCustomTocProcessor({
             maxDepth: 2
         });
         const result = await processor.process(markdown);
@@ -141,7 +142,7 @@ describe("rehype-custom-toc", () => {
     });
 
     it("respects maxDepth of 4", async () => {
-        const processor = createProcessor({
+        const processor = createRehypeCustomTocProcessor({
             maxDepth: 4
         });
         const result = await processor.process(markdown);
@@ -174,7 +175,7 @@ describe("rehype-custom-toc", () => {
     });
 
     it("uses ordered lists when ordered is true", async () => {
-        const processor = createProcessor({
+        const processor = createRehypeCustomTocProcessor({
             ordered: true
         });
         const result = await processor.process(markdown);
@@ -199,6 +200,75 @@ describe("rehype-custom-toc", () => {
 <h2 id="section-1">Section 1</h2>
 <h3 id="subsection-11">Subsection 1.1</h3>
 <h4 id="subsection-111">Subsection 1.1.1</h4>`.trim();
+
+        expect(normalizeHtml(result.toString())).toBe(normalizeHtml(expected));
+    });
+});
+
+const rehypeSluggerProcessor = unified().use(remarkParse).use(remarkRehype).use(rehypeSlugger).use(rehypeStringify);
+
+describe("rehypeSlugger", () => {
+    it("generates slugs for headings", async () => {
+        const result = await rehypeSluggerProcessor.process(markdown);
+
+        const expected = `
+<h1 id="title">Title</h1>
+<p>This is a sample markdown paragraph.</p>
+<h2 id="section-1">Section 1</h2>
+<h3 id="subsection-11">Subsection 1.1</h3>
+<h4 id="subsection-111">Subsection 1.1.1</h4>`.trim();
+
+        expect(normalizeHtml(result.toString())).toBe(normalizeHtml(expected));
+    });
+
+    it("generates unique slugs for headings with the same text", async () => {
+        const markdownWithDuplicates = `
+# Title
+
+This is a sample markdown paragraph.
+
+## Section 1
+
+### Subsection 1.1
+
+## Same Heading
+
+## Same Heading
+
+### 日本語の見出し
+            `.trim();
+
+        const result = await rehypeSluggerProcessor.process(markdownWithDuplicates);
+
+        const expected = `
+<h1 id="title">Title</h1>
+<p>This is a sample markdown paragraph.</p>
+<h2 id="section-1">Section 1</h2>
+<h3 id="subsection-11">Subsection 1.1</h3>
+<h2 id="same-heading">Same Heading</h2>
+<h2 id="same-heading-1">Same Heading</h2>
+<h3 id="日本語の見出し">日本語の見出し</h3>
+            `.trim();
+
+        expect(normalizeHtml(result.toString())).toBe(normalizeHtml(expected));
+    });
+
+    it("preserves existing non-empty ids and replaces empty-string ids", async () => {
+        const processor = unified().use(rehypeParse, { fragment: true }).use(rehypeSlugger).use(rehypeStringify);
+
+        const original = `
+<h1>Title</h1>
+<h2 id="custom-id">Custom</h2>
+<h3 id="">Empty</h3>
+            `.trim();
+
+        const result = await processor.process(original);
+
+        const expected = `
+<h1 id="title">Title</h1>
+<h2 id="custom-id">Custom</h2>
+<h3 id="empty">Empty</h3>
+            `.trim();
 
         expect(normalizeHtml(result.toString())).toBe(normalizeHtml(expected));
     });

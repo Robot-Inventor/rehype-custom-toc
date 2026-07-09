@@ -12,7 +12,7 @@ npm install rehype-custom-toc
 
 The table of contents will be inserted at the location of the `<!-- toc -->` comment or at the beginning of the file if no comment is found.
 
-When parsing HTML with rehype, the `<!-- toc -->` comment is preserved as-is, but when converting from Markdown you need to convert Markdown comments to HTML comments (as shown below with `remark-comment`) so rehype-custom-toc can detect the ToC marker.
+When parsing HTML with rehype, the `<!-- toc -->` comment is preserved as-is, but when converting from Markdown you need to convert Markdown comments to HTML comments (as shown below with `remark-comment`) so rehype-custom-toc can detect the TOC marker.
 
 ```typescript
 import remarkComment from "remark-comment";
@@ -89,6 +89,43 @@ The above code will output the following (formatted for readability):
         </ul>
     </nav>
 </aside>
+<h2 id="section-1">Section 1</h2>
+<h3 id="subsection-11">Subsection 1.1</h3>
+```
+
+### Add IDs to headings without a TOC
+
+You can import `rehypeSlugger` from `rehype-custom-toc` and use it as a standalone plugin to add slugs to headings without generating a table of contents. This is useful if you want to add IDs to headings but don't want a TOC.
+
+```typescript
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import { rehypeSlugger } from "rehype-custom-toc";
+import rehypeStringify from "rehype-stringify";
+import { unified } from "unified";
+
+const processor = unified().use(remarkParse).use(remarkRehype).use(rehypeSlugger).use(rehypeStringify);
+
+const markdown = `
+# Title
+
+This is a sample markdown paragraph.
+
+## Section 1
+
+### Subsection 1.1
+`;
+
+processor.process(markdown).then((result) => {
+    console.log(result.toString());
+});
+```
+
+The above code will output the following (formatted for readability):
+
+```html
+<h1 id="title">Title</h1>
+<p>This is a sample markdown paragraph.</p>
 <h2 id="section-1">Section 1</h2>
 <h3 id="subsection-11">Subsection 1.1</h3>
 ```
