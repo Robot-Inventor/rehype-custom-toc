@@ -1,5 +1,11 @@
 # rehype-custom-toc
 
+## 1.1.0
+
+### Minor Changes
+
+- [#70](https://github.com/Robot-Inventor/rehype-custom-toc/pull/70) [`940c47d`](https://github.com/Robot-Inventor/rehype-custom-toc/commit/940c47d7bb271018678087e082470b18b3228881) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - feat: export rehypeSlugger to allow adding IDs to headings without generating a TOC
+
 ## 1.0.7
 
 ### Patch Changes
