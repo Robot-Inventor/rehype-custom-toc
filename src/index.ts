@@ -87,7 +87,8 @@ const isHeading = (node: Element): boolean => ["h1", "h2", "h3", "h4", "h5", "h6
  */
 const addIdToHeading = (node: Element, slugger: GitHubSlugger): { slug: string; text: string } => {
     const text = toText(node).trim();
-    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing Empty-string ids should be replaced with a generated slug
+    // Empty-string ids should be replaced with a generated slug
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     const slug = node.properties.id || slugger.slug(text);
     node.properties.id = slug;
     return { slug, text };
