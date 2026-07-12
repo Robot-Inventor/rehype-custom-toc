@@ -63,7 +63,7 @@
     "remark-comment": "^1.0.0",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
-    "typescript": "^6.0.0",
+    "typescript": "^7.0.0",
     "vitest": "^4.0.16"
   },
   "overrides": {
