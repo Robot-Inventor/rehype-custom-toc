@@ -1,5 +1,15 @@
 # rehype-custom-toc
 
+## 1.1.1
+
+### Patch Changes
+
+- [#92](https://github.com/Robot-Inventor/rehype-custom-toc/pull/92) [`e4bf389`](https://github.com/Robot-Inventor/rehype-custom-toc/commit/e4bf389510654119bc6d5184d15911004d939116) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency @robot-inventor/ts-utils to ^0.8.8
+
+- [#80](https://github.com/Robot-Inventor/rehype-custom-toc/pull/80) [`a5f8384`](https://github.com/Robot-Inventor/rehype-custom-toc/commit/a5f83847b99b8153fde7a1304bf5d572196443c2) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - chore: update vulnerable dependencies
+
+- [#93](https://github.com/Robot-Inventor/rehype-custom-toc/pull/93) [`967da37`](https://github.com/Robot-Inventor/rehype-custom-toc/commit/967da37b609f9d8f214dc90c7208951fa8f0db3b) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency unist-util-visit to ^5.1.0
+
 ## 1.1.0
 
 ### Minor Changes
