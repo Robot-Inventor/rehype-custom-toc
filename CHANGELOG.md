@@ -1,5 +1,11 @@
 # rehype-custom-toc
 
+## 1.1.3
+
+### Patch Changes
+
+- [#102](https://github.com/Robot-Inventor/rehype-custom-toc/pull/102) [`5746b15`](https://github.com/Robot-Inventor/rehype-custom-toc/commit/5746b15614d40c6e310d81c0729893985440a37e) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency @robot-inventor/ts-utils to ^0.8.9
+
 ## 1.1.2
 
 ### Patch Changes
