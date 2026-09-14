@@ -88,7 +88,7 @@ const isHeading = (node: Element): boolean => ["h1", "h2", "h3", "h4", "h5", "h6
 const addIdToHeading = (node: Element, slugger: GitHubSlugger): { slug: string; text: string } => {
     const text = toText(node).trim();
     // Empty-string ids should be replaced with a generated slug
-    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+    // oxlint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     const slug = node.properties.id || slugger.slug(text);
     node.properties.id = slug;
     return { slug, text };
@@ -120,7 +120,7 @@ const rehypeSlugger: Plugin<[], Root> = () => {
  * @param options Options for the plugin
  * @returns The generated table of contents
  */
-// eslint-disable-next-line max-statements, max-lines-per-function
+// oxlint-disable-next-line max-statements, max-lines-per-function
 const generateToc = (tree: Root, options: Required<RehypeCustomTocOptions>): RootContent[] => {
     const toc: Element = {
         children: [],
@@ -135,7 +135,7 @@ const generateToc = (tree: Root, options: Required<RehypeCustomTocOptions>): Roo
         if (!isHeading(node)) return;
 
         const { slug, text } = addIdToHeading(node, slugger);
-        // eslint-disable-next-line no-magic-numbers
+        // oxlint-disable-next-line no-magic-numbers
         const depth = parseInt(node.tagName.slice(1), 10);
         headings.push({
             depth,
@@ -151,7 +151,7 @@ const generateToc = (tree: Root, options: Required<RehypeCustomTocOptions>): Roo
     const parents: Element[] = [toc];
 
     for (const heading of headings) {
-        // eslint-disable-next-line no-continue
+        // oxlint-disable-next-line no-continue
         if (heading.depth > options.maxDepth) continue;
 
         const li = h("li", h("a", { href: `#${heading.slug}` }, heading.text));
@@ -170,10 +170,9 @@ const generateToc = (tree: Root, options: Required<RehypeCustomTocOptions>): Roo
             currentDepth = heading.depth;
         } else {
             // The current heading is at a shallower level than the previous one.
-            // eslint-disable-next-line id-length
             for (let i = 0; i < currentDepth - heading.depth; i++) {
                 parents.pop();
-                // eslint-disable-next-line no-magic-numbers
+                // oxlint-disable-next-line no-magic-numbers
                 const parentNode = parents[parents.length - 1];
                 if (!parentNode) {
                     throw new Error("Parent node not found. Make sure the headings are sorted by depth.");
@@ -209,25 +208,25 @@ const rehypeCustomToc: Plugin<[RehypeCustomTocOptions], Root> = (userOptions: Re
         visitParents(tree, "comment", (node, ancestors) => {
             if (node.value.trim().toLowerCase() !== "toc") return;
 
-            // eslint-disable-next-line no-magic-numbers, @typescript-eslint/no-non-null-assertion
+            // oxlint-disable-next-line no-magic-numbers, @typescript-eslint/no-non-null-assertion
             const parent = ancestors.at(-1)!;
             const index = parent.children.indexOf(node);
 
-            // eslint-disable-next-line no-magic-numbers
+            // oxlint-disable-next-line no-magic-numbers
             if (parent.type === "element" && parent.tagName === "p" && parent.children.length === 1) {
-                // eslint-disable-next-line no-magic-numbers, @typescript-eslint/no-non-null-assertion
+                // oxlint-disable-next-line no-magic-numbers, @typescript-eslint/no-non-null-assertion
                 const grand = ancestors.at(-2)!;
                 const parentIdx = grand.children.indexOf(parent);
-                // eslint-disable-next-line no-magic-numbers
+                // oxlint-disable-next-line no-magic-numbers
                 grand.children.splice(parentIdx, 1, ...tocNodes);
             } else {
-                // eslint-disable-next-line no-magic-numbers
+                // oxlint-disable-next-line no-magic-numbers
                 parent.children.splice(index, 1, ...tocNodes);
             }
             tocInserted = true;
         });
 
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+        // oxlint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (!tocInserted) {
             tree.children.unshift(...tocNodes);
         }
