@@ -31,7 +31,7 @@
   },
   "scripts": {
     "test": "cross-env NODE_ENV=\"production\" vitest",
-    "lint": "eslint --flag unstable_native_nodejs_ts_config \"./src/**/*.ts\"",
+    "lint": "oxlint ./src",
     "build": "tsc",
     "format": "prettier --write \"./src/**/*.ts\"",
     "format:check": "prettier --check \"./src/**/*.ts\"",
@@ -52,11 +52,11 @@
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.1",
     "@changesets/cli": "^3.0.3",
-    "@robot-inventor/eslint-config": "^13.1.1",
+    "@robot-inventor/oxlint-config": "^0.2.0",
     "@robot-inventor/tsconfig-base": "^7.2.0",
     "@types/hast": "^3.0.5",
     "cross-env": "^10.1.0",
-    "eslint": "^10.10.0",
+    "oxlint": "^1.83.0",
     "prettier": "^3.9.6",
     "rehype-parse": "^9.0.1",
     "rehype-stringify": "^10.0.1",
@@ -65,8 +65,5 @@
     "remark-rehype": "^11.1.2",
     "typescript": "^6.0.3",
     "vitest": "^5.0.0"
-  },
-  "overrides": {
-    "zod-validation-error": "^5.0.0"
   }
 }
