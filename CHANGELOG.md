@@ -1,5 +1,11 @@
 # rehype-custom-toc
 
+## 1.1.4
+
+### Patch Changes
+
+- [#124](https://github.com/Robot-Inventor/rehype-custom-toc/pull/124) [`06ad147`](https://github.com/Robot-Inventor/rehype-custom-toc/commit/06ad1473b85e920e61d15118745f2e399ddf7626) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - chore: remove unused oxlint-disable comments
+
 ## 1.1.3
 
 ### Patch Changes
