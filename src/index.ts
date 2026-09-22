@@ -120,7 +120,7 @@ const rehypeSlugger: Plugin<[], Root> = () => {
  * @param options Options for the plugin
  * @returns The generated table of contents
  */
-// oxlint-disable-next-line max-statements, max-lines-per-function
+// oxlint-disable-next-line max-statements
 const generateToc = (tree: Root, options: Required<RehypeCustomTocOptions>): RootContent[] => {
     const toc: Element = {
         children: [],
