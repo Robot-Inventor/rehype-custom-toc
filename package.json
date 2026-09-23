@@ -57,7 +57,7 @@
     "@types/hast": "^3.0.5",
     "cross-env": "^10.1.0",
     "oxlint": "^1.85.0",
-    "prettier": "^3.9.8",
+    "prettier": "^3.9.9",
     "rehype-parse": "^9.0.1",
     "rehype-stringify": "^10.0.1",
     "remark-comment": "^1.0.0",
