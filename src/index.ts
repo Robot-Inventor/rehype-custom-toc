@@ -43,6 +43,11 @@ interface RehypeCustomTocOptions {
      */
     maxDepth?: number;
     /**
+     * The minimum depth of headings to include in the table of contents.
+     * @default 1
+     */
+    minDepth?: number;
+    /**
      * Whether to use an ordered list (`<ol>`) or an unordered list (`<ul>`).
      * @default false
      */
@@ -68,6 +73,7 @@ const defaultTemplate: RehypeCustomTocTemplate = (html: string): string =>
  */
 const DEFAULT_OPTIONS = {
     maxDepth: 3,
+    minDepth: 1,
     ordered: false,
     template: defaultTemplate
 } as const satisfies Required<RehypeCustomTocOptions>;
@@ -137,6 +143,8 @@ const generateToc = (tree: Root, options: Required<RehypeCustomTocOptions>): Roo
         const { slug, text } = addIdToHeading(node, slugger);
         // oxlint-disable-next-line no-magic-numbers
         const depth = parseInt(node.tagName.slice(1), 10);
+        if (depth < options.minDepth || depth > options.maxDepth) return;
+
         headings.push({
             depth,
             slug,
@@ -151,23 +159,20 @@ const generateToc = (tree: Root, options: Required<RehypeCustomTocOptions>): Roo
     const parents: Element[] = [toc];
 
     for (const heading of headings) {
-        // oxlint-disable-next-line no-continue
-        if (heading.depth > options.maxDepth) continue;
-
         const li = h("li", h("a", { href: `#${heading.slug}` }, heading.text));
 
-        if (heading.depth === currentDepth) {
+        const depth = heading.depth - options.minDepth + 1;
+
+        if (depth === currentDepth) {
             // The current heading is at the same level as the previous one.
             currentParent.children.push(li);
-            currentDepth = heading.depth;
-        } else if (heading.depth > currentDepth) {
+        } else if (depth > currentDepth) {
             // The current heading is at a deeper level than the previous one.
             const ul = h(options.ordered ? "ol" : "ul", li);
             currentParent.children.push(ul);
 
             currentParent = ul;
             parents.push(currentParent);
-            currentDepth = heading.depth;
         } else {
             // The current heading is at a shallower level than the previous one.
             for (let i = 0; i < currentDepth - heading.depth; i++) {
@@ -182,8 +187,9 @@ const generateToc = (tree: Root, options: Required<RehypeCustomTocOptions>): Roo
             }
 
             currentParent.children.push(li);
-            currentDepth = heading.depth;
         }
+
+        currentDepth = heading.depth - options.minDepth + 1;
     }
 
     return fromHtml(options.template(toHtml(toc)), { fragment: true }).children;
