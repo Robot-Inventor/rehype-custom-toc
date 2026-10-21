@@ -3,7 +3,6 @@ import type { Plugin, Transformer } from "unified";
 import GitHubSlugger from "github-slugger";
 import { fromHtml } from "hast-util-from-html";
 import { h } from "hastscript";
-import { isNonEmptyArray } from "@robot-inventor/ts-utils";
 import { toHtml } from "hast-util-to-html";
 import { toText } from "hast-util-to-text";
 import { visit } from "unist-util-visit";
@@ -144,7 +143,7 @@ const generateToc = (tree: Root, options: Required<RehypeCustomTocOptions>): Roo
         });
     });
 
-    if (!isNonEmptyArray(headings)) return [];
+    if (!headings[0]) return [];
 
     let currentDepth = headings[0].depth;
     let currentParent = toc;
