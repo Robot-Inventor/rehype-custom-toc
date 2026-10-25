@@ -1,5 +1,15 @@
 # rehype-custom-toc
 
+## 1.1.6
+
+### Patch Changes
+
+- [#144](https://github.com/Robot-Inventor/rehype-custom-toc/pull/144) [`0346f48`](https://github.com/Robot-Inventor/rehype-custom-toc/commit/0346f4861b0492f40b08b9ea77cefae55aaf1c0b) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency unist-util-visit to ^5.2.0
+
+- [#145](https://github.com/Robot-Inventor/rehype-custom-toc/pull/145) [`45070a1`](https://github.com/Robot-Inventor/rehype-custom-toc/commit/45070a1a4727084abf595c40e4e3388875669b17) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency unist-util-visit-parents to ^6.1.0
+
+- [#146](https://github.com/Robot-Inventor/rehype-custom-toc/pull/146) [`cad170d`](https://github.com/Robot-Inventor/rehype-custom-toc/commit/cad170de98c711cc0cf2b0e58f41a5311686d288) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency hast-util-to-text to ^4.0.3
+
 ## 1.1.5
 
 ### Patch Changes
