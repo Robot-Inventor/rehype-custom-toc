@@ -174,6 +174,33 @@ describe("rehype-custom-toc", () => {
         expect(normalizeHtml(result.toString())).toBe(normalizeHtml(expected));
     });
 
+    it("respects minDepth of 2", async () => {
+        const processor = createRehypeCustomTocProcessor({
+            minDepth: 2
+        });
+        const result = await processor.process(markdown);
+
+        const expected = `
+<h1 id="title">Title</h1>
+<p>This is a sample markdown paragraph.</p>
+<aside class="toc">
+    <h2>Contents</h2>
+    <nav>
+        <ul>
+            <li><a href="#section-1">Section 1</a></li>
+            <ul>
+                <li><a href="#subsection-11">Subsection 1.1</a></li>
+            </ul>
+        </ul>
+    </nav>
+</aside>
+<h2 id="section-1">Section 1</h2>
+<h3 id="subsection-11">Subsection 1.1</h3>
+<h4 id="subsection-111">Subsection 1.1.1</h4>`.trim();
+
+        expect(normalizeHtml(result.toString())).toBe(normalizeHtml(expected));
+    });
+
     it("uses ordered lists when ordered is true", async () => {
         const processor = createRehypeCustomTocProcessor({
             ordered: true
