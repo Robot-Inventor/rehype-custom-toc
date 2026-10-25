@@ -1,5 +1,0 @@
----
-"rehype-custom-toc": patch
----
-
-fix(deps): update dependency unist-util-visit-parents to ^6.1.0
