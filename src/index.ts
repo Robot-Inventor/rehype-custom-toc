@@ -90,7 +90,10 @@ const addIdToHeading = (node: Element, slugger: GitHubSlugger): { slug: string; 
     // oxlint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     const slug = node.properties.id || slugger.slug(text);
     node.properties.id = slug;
-    return { slug, text };
+    return {
+        slug,
+        text
+    };
 };
 
 /**
@@ -194,7 +197,7 @@ const generateToc = (tree: Root, options: Required<RehypeCustomTocOptions>): Roo
  * @returns The transformer function
  */
 const rehypeCustomToc: Plugin<[RehypeCustomTocOptions], Root> = (userOptions: RehypeCustomTocOptions) => {
-    const options = { ...DEFAULT_OPTIONS, ...userOptions };
+    const options = { ...DEFAULT_OPTIONS, ...userOptions } as const;
 
     /**
      * The transformer function for the plugin.
