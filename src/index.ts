@@ -214,8 +214,11 @@ const rehypeCustomToc: Plugin<[RehypeCustomTocOptions], Root> = (userOptions: Re
             const parent = ancestors.at(-1)!;
             const index = parent.children.indexOf(node);
 
-            // oxlint-disable-next-line no-magic-numbers
-            if (parent.type === "element" && parent.tagName === "p" && parent.children.length === 1) {
+            const isParagraphContainingOnlyTheComment =
+                // oxlint-disable-next-line no-magic-numbers
+                parent.type === "element" && parent.tagName === "p" && parent.children.length === 1;
+
+            if (isParagraphContainingOnlyTheComment) {
                 // oxlint-disable-next-line no-magic-numbers, @typescript-eslint/no-non-null-assertion
                 const grand = ancestors.at(-2)!;
                 const parentIdx = grand.children.indexOf(parent);
