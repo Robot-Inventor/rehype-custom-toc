@@ -1,5 +1,11 @@
 # rehype-custom-toc
 
+## 1.1.7
+
+### Patch Changes
+
+- [#154](https://github.com/Robot-Inventor/rehype-custom-toc/pull/154) [`bb1fa00`](https://github.com/Robot-Inventor/rehype-custom-toc/commit/bb1fa006e2c517b2164633965c78ef65d681e7a7) Thanks [@Robot-Inventor](https://github.com/Robot-Inventor)! - refactor: extract complex conditions
+
 ## 1.1.6
 
 ### Patch Changes
