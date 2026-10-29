@@ -1,5 +1,13 @@
 # rehype-custom-toc
 
+## 1.1.8
+
+### Patch Changes
+
+- [#156](https://github.com/Robot-Inventor/rehype-custom-toc/pull/156) [`e1b7ddf`](https://github.com/Robot-Inventor/rehype-custom-toc/commit/e1b7ddf5ac760c2a5efca363d04909a93ba079d9) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency hast-util-to-html to ^9.0.6
+
+- [#157](https://github.com/Robot-Inventor/rehype-custom-toc/pull/157) [`f428f8f`](https://github.com/Robot-Inventor/rehype-custom-toc/commit/f428f8feebe125096e7d8300d3913e7618f1bf8a) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency hastscript to ^9.0.2
+
 ## 1.1.7
 
 ### Patch Changes
