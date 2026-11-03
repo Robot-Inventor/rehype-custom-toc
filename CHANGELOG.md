@@ -1,5 +1,11 @@
 # rehype-custom-toc
 
+## 1.1.9
+
+### Patch Changes
+
+- [#159](https://github.com/Robot-Inventor/rehype-custom-toc/pull/159) [`6abc3db`](https://github.com/Robot-Inventor/rehype-custom-toc/commit/6abc3dbc1c30d476fdd8797bbc47cddc47ea7a6d) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency hastscript to ^9.0.3
+
 ## 1.1.8
 
 ### Patch Changes
