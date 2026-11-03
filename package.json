@@ -43,7 +43,7 @@
     "hast-util-from-html": "^2.0.3",
     "hast-util-to-html": "^9.0.6",
     "hast-util-to-text": "^4.0.3",
-    "hastscript": "^9.0.2",
+    "hastscript": "^9.0.3",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.2.0",
     "unist-util-visit-parents": "^6.1.0"
