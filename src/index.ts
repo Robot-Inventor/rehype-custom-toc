@@ -90,6 +90,7 @@ const addIdToHeading = (node: Element, slugger: GitHubSlugger): { slug: string; 
     // oxlint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     const slug = node.properties.id || slugger.slug(text);
     node.properties.id = slug;
+
     return {
         slug,
         text
@@ -109,6 +110,7 @@ const rehypeSlugger: Plugin<[], Root> = () => {
         const slugger = new GitHubSlugger();
         visit(tree, "element", (node) => {
             if (!isHeading(node)) return;
+
             addIdToHeading(node, slugger);
         });
     };
@@ -228,6 +230,7 @@ const rehypeCustomToc: Plugin<[RehypeCustomTocOptions], Root> = (userOptions: Re
                 // oxlint-disable-next-line no-magic-numbers
                 parent.children.splice(index, 1, ...tocNodes);
             }
+
             tocInserted = true;
         });
 
