@@ -1,5 +1,11 @@
 # rehype-custom-toc
 
+## 1.1.12
+
+### Patch Changes
+
+- [#180](https://github.com/Robot-Inventor/rehype-custom-toc/pull/180) [`d5ce2c3`](https://github.com/Robot-Inventor/rehype-custom-toc/commit/d5ce2c397b74cb7b4d1a082140d8a91e3beb558b) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency hast-util-to-text to ^4.0.5
+
 ## 1.1.11
 
 ### Patch Changes
